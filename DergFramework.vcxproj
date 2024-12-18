@@ -242,6 +242,7 @@ OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClInclude Include="include\util\ext\AL\efx-presets.h" />
     <ClInclude Include="include\util\ext\AL\efx.h" />
     <ClInclude Include="include\util\ext\AudioFile.h" />
+    <ClInclude Include="include\util\Concepts.hpp" />
     <ClInclude Include="include\util\ext\freetype\config\ftconfig.h" />
     <ClInclude Include="include\util\ext\freetype\config\ftheader.h" />
     <ClInclude Include="include\util\ext\freetype\config\ftmodule.h" />

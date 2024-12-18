@@ -18,19 +18,19 @@ struct Rect {
 		return (xy == rect2.xy && wh == rect2.wh);
 	}
 
-	// Gets the top left coordinate of the rectangle as a vec2.
+	// Gets the bottom left coordinate of the rectangle as a vec2.
 	glm::vec2 getBL() const {
 		return xy;
 	}
-	// Gets the top right coordinate of the rectangle as a vec2.
+	// Gets the bottom right coordinate of the rectangle as a vec2.
 	glm::vec2 getBR() const {
 		return glm::vec2(xy.x + wh.x, xy.y);
 	}
-	// Gets the bottom right coordinate of the rectangle as a vec2.
+	// Gets the top left coordinate of the rectangle as a vec2.
 	glm::vec2 getTL() const {
 		return glm::vec2(xy.x, xy.y + wh.y);
 	}
-	// Gets the bottom right coordinate of the rectangle as a vec2.
+	// Gets the top right coordinate of the rectangle as a vec2.
 	glm::vec2 getTR() const {
 		return glm::vec2(xy.x + wh.x, xy.y + wh.y);
 	}

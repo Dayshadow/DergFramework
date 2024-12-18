@@ -16,6 +16,10 @@
 
 constexpr auto SIXTY_TIMES_PER_SECOND = 0.01666666666f;
 constexpr auto ONE_TIME_PER_SECOND = 0.001f;
+constexpr float degrees(float x) {
+	return x * (float(M_PI) / 180.f);
+}
+constexpr float TAU_F = float(M_PI * 2.0);
 // A collection of single functions that are useful in a variety of situations
 // breaks if not inline for some reason
 namespace utils {
