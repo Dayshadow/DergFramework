@@ -11,6 +11,7 @@ struct glBuffer {
 		if (ID == 0) return;
 		DELETE_LOG("GL Buffer " << ID << " Deleted.");
 		glDeleteBuffers(1, &ID);
+		ID = 0;
 	}
 };
 

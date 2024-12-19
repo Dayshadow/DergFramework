@@ -39,9 +39,6 @@
     <ClInclude Include="include\Framework\Graphics\FrameBuffer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Framework\Graphics\GenericMeshes.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Framework\Graphics\GenericShaders.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

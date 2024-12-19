@@ -23,7 +23,7 @@
 #endif
 
 #ifdef GLGENLOGGING_ENABLED
-#define GLGEN_LOG(expr) std::cout << expr << "\n"
+#define GLGEN_LOG(expr) std::cout << "[OpenGL]: " << expr << "\n"
 #else
 #define GLGEN_LOG(expr)
 #endif

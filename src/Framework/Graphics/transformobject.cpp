@@ -97,20 +97,11 @@ void TransformObject::calculateTransform()
 		// Matrix multiplication is non-commutative, so it needs to be done in TRS order in this case. It's always the reverse order than you expect it to be.
 
 		// Translate to world space.
-		if (!m_useInterpolation) {
-			m_transform = glm::translate(glm::mat4(1.0f), m_position);
-		}
-		else {
-			m_transform = glm::translate(glm::mat4(1.0f), apparentPos);
-		}
+		m_transform = glm::translate(glm::mat4(1.0f), m_useInterpolation? apparentPos : m_position);
 
 		// Rotate along axis
-		if (!m_useInterpolation) {
-			m_transform = glm::rotate(m_transform, m_rotation, m_rotationAxis);
-		}
-		else {
-			m_transform = glm::rotate(m_transform, apparentRot, m_rotationAxis);
-		}
+		m_transform = glm::rotate(m_transform, m_useInterpolation? apparentRot : m_rotation, m_rotationAxis);
+
 		// Do the scaling.
 		m_transform = glm::scale(m_transform, glm::vec3(m_scale, 1.f));
 		// Transform to the origin, *technically* done first

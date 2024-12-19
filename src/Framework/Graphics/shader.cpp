@@ -67,7 +67,7 @@ GLuint Shader::compileShaders(const char* vs_filePath, const char* fs_filePath) 
 		// The maxLength includes the NULL character
 		std::vector<GLchar> errorLog(maxLength);
 		glGetShaderInfoLog(vs, maxLength, &maxLength, &errorLog[0]);
-		LOG("Vertex shader compilation error");
+		ERROR_LOG("Vertex shader compilation error");
 		for (int i = 0; i < errorLog.size(); i++) {
 			std::cout << errorLog[i];
 		}
@@ -94,7 +94,7 @@ GLuint Shader::compileShaders(const char* vs_filePath, const char* fs_filePath) 
 		std::vector<GLchar> errorLog(maxLength);
 		glGetShaderInfoLog(fs, maxLength, &maxLength, &errorLog[0]);
 
-		LOG("Fragment shader compilation error" << std::endl);
+		ERROR_LOG("Fragment shader compilation error" << std::endl);
 		for (int i = 0; i < errorLog.size(); i++) {
 			std::cout << errorLog[i];
 		}
@@ -125,7 +125,7 @@ GLuint Shader::compileShaders(const char* vs_filePath, const char* fs_filePath) 
 		std::vector<GLchar> errorLog(maxLength);
 		glGetProgramInfoLog(program->ID, maxLength, &maxLength, &errorLog[0]);
 
-		LOG("Shader linking error: ");
+		ERROR_LOG("Shader linking error: ");
 		for (int i = 0; i < errorLog.size(); i++) {
 			std::cout << errorLog[i];
 		}
@@ -168,7 +168,7 @@ GLuint Shader::compileShaders(const char* vs_filePath, const char* gs_filePath, 
 		// The maxLength includes the NULL character
 		std::vector<GLchar> errorLog(maxLength);
 		glGetShaderInfoLog(vs, maxLength, &maxLength, &errorLog[0]);
-		LOG("Vertex shader compilation error");
+		ERROR_LOG("Vertex shader compilation error");
 		for (int i = 0; i < errorLog.size(); i++) {
 			std::cout << errorLog[i];
 		}
@@ -195,7 +195,7 @@ GLuint Shader::compileShaders(const char* vs_filePath, const char* gs_filePath, 
 		// The maxLength includes the NULL character
 		std::vector<GLchar> errorLog(maxLength);
 		glGetShaderInfoLog(gs, maxLength, &maxLength, &errorLog[0]);
-		LOG("Geometry shader compilation error");
+		ERROR_LOG("Geometry shader compilation error");
 		for (int i = 0; i < errorLog.size(); i++) {
 			std::cout << errorLog[i];
 		}
@@ -222,7 +222,7 @@ GLuint Shader::compileShaders(const char* vs_filePath, const char* gs_filePath, 
 		std::vector<GLchar> errorLog(maxLength);
 		glGetShaderInfoLog(fs, maxLength, &maxLength, &errorLog[0]);
 
-		LOG("Fragment shader compilation error");
+		ERROR_LOG("Fragment shader compilation error");
 		for (int i = 0; i < errorLog.size(); i++) {
 			std::cout << errorLog[i];
 		}
@@ -255,7 +255,7 @@ GLuint Shader::compileShaders(const char* vs_filePath, const char* gs_filePath, 
 		std::vector<GLchar> errorLog(maxLength);
 		glGetProgramInfoLog(program->ID, maxLength, &maxLength, &errorLog[0]);
 
-		LOG("Shader linking error: ");
+		ERROR_LOG("Shader linking error: ");
 		for (int i = 0; i < errorLog.size(); i++) {
 			std::cout << errorLog[i];
 		}
@@ -329,14 +329,6 @@ GLint Shader::addIntUniform(std::string_view p_name, GLint p_value)
 {
 	use();
 	GLint loc = glGetUniformLocation(program->ID, p_name.data());
-#ifdef LOADLOGGING_ENABLEDD
-	if (loc != -1) {
-		LOAD_LOG("addIntUniform: glGetUniformLocation returned \"" << loc << "\" for " << p_name << ".");
-	}
-	else {
-		ERROR_LOG("addIntUniform: Uniform location not found for " << p_name << ".");
-	}
-#endif
 	Uniform u = Uniform{ p_name, UniformTypes::INT, p_value };
 	u.loc = loc;
 	m_uniforms.push_back(u);
@@ -356,14 +348,6 @@ GLint Shader::addTexUniform(std::string_view p_name, GLuint p_value)
 {
 	use();
 	GLint loc = glGetUniformLocation(program->ID, p_name.data());
-#ifdef LOADLOGGING_ENABLEDD
-	if (loc != -1) {
-		LOAD_LOG("addTexUniform: glGetUniformLocation returned \"" << loc << "\" for " << p_name << ".");
-	}
-	else {
-		ERROR_LOG("addTexUniform: Uniform location not found for " << p_name << ".");
-	}
-#endif
 	Uniform u = Uniform{ p_name, UniformTypes::TEX, p_value };
 	u.loc = loc;
 	m_uniforms.push_back(u);
@@ -413,14 +397,6 @@ GLint Shader::addMat4Uniform(std::string_view p_name, glm::mat4& p_value)
 {
 	use();
 	GLint loc = glGetUniformLocation(program->ID, p_name.data());
-#ifdef LOADLOGGING_ENABLEDD // disabled because it runs every frame
-	if (loc != -1) {
-		std::cout << "addMat4Uniform: glGetUniformLocation returned \"" << loc << "\" for " << p_name << "." << std::endl;
-	}
-	else {
-		std::cout << "addMat4Uniform: Uniform location not found for " << p_name << "." << std::endl;
-	}
-#endif
 	Uniform u = Uniform{ p_name, UniformTypes::MAT4, p_value };
 	u.loc = loc;
 	m_uniforms.push_back(u);
@@ -437,14 +413,6 @@ void Shader::setMat4Uniform(GLint p_loc, glm::mat4& p_value)
 void Shader::setMat4UniformStaticNamed(std::string_view p_name, glm::mat4& p_value, GLuint p_progID)
 {
 	GLint loc = glGetUniformLocation(p_progID, p_name.data());
-#ifdef LOADLOGGING_ENABLEDD // disabled because it runs every frame
-	if (loc != -1) {
-		std::cout << "addMat4Uniform: glGetUniformLocation returned \"" << loc << "\" for " << p_name << "." << std::endl;
-	}
-	else {
-		ERROR_LOG("addMat4Uniform: Uniform location not found for " << p_name << ".");
-	}
-#endif
 	glCheck(glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(p_value)));
 }
 
@@ -457,14 +425,6 @@ GLint Shader::addVec2Uniform(std::string_view p_name, glm::vec2 p_value)
 {
 	use();
 	GLint loc = glGetUniformLocation(program->ID, p_name.data());
-#ifdef LOADLOGGING_ENABLEDD
-	if (loc != -1) {
-		LOAD_LOG("addVec2Uniform: glGetUniformLocation returned \"" << loc << "\" for " << p_name << ".");
-	}
-	else {
-		ERROR_LOG("addVec2Uniform: Uniform location not found for " << p_name << ".");
-	}
-#endif
 	Uniform u = Uniform{ p_name, UniformTypes::VEC2, p_value };
 	u.loc = loc;
 	m_uniforms.push_back(u);
@@ -487,14 +447,6 @@ GLint Shader::addVec3Uniform(std::string_view p_name, glm::vec3 p_value)
 {
 	use();
 	GLint loc = glGetUniformLocation(program->ID, p_name.data());
-#ifdef LOADLOGGING_ENABLEDD
-	if (loc != -1) {
-		LOAD_LOG("addVec2Uniform: glGetUniformLocation returned \"" << loc << "\" for " << p_name << ".");
-	}
-	else {
-		ERROR_LOG("addVec2Uniform: Uniform location not found for " << p_name << ".");
-	}
-#endif
 	Uniform u = Uniform{ p_name, UniformTypes::VEC3, p_value };
 	u.loc = loc;
 	m_uniforms.push_back(u);
@@ -517,14 +469,6 @@ GLint Shader::addVec4Uniform(std::string_view p_name, glm::vec4 p_value)
 {
 	use();
 	GLint loc = glGetUniformLocation(program->ID, p_name.data());
-#ifdef LOADLOGGING_ENABLEDD
-	if (loc != -1) {
-		LOAD_LOG("addVec2Uniform: glGetUniformLocation returned \"" << loc << "\" for " << p_name << ".");
-	}
-	else {
-		ERROR_LOG("addVec2Uniform: Uniform location not found for " << p_name << ".");
-	}
-#endif
 	Uniform u = Uniform{ p_name, UniformTypes::VEC4, p_value };
 	u.loc = loc;
 	m_uniforms.push_back(u);
@@ -549,10 +493,6 @@ GLuint Shader::getUniformLoc(std::string_view uniformName)
 	for (auto& u : m_uniforms) {
 		if (u.name == uniformName) loc = u.loc;
 	}
-	//if (loc == -1 && uniformName != "transform") {
-		//ERROR_LOG("Could not find uniform location for " << uniformName << ".");
-	//}
-	// wha
 	return loc;
 }
 

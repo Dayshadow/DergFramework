@@ -74,17 +74,21 @@ public:
     Mesh(const Mesh& p_other) :
         m_verts(p_other.m_verts),
         m_indices(p_other.m_indices),
+        m_instances(p_other.m_instances),
         m_attribList(p_other.m_attribList),
         m_singleVertexSize(p_other.m_singleVertexSize),
+        m_singleInstanceSize(p_other.m_singleInstanceSize),
         m_GPUVertCount(p_other.m_GPUVertCount),
         m_streamType(p_other.m_streamType)
     {
         // We can't copy these, so we have to create new opengl buffers. Copying is discouraged.
         GLGEN_LOG("Copied mesh! VAO: " << p_other.VAO->ID);
         vert_VBO = std::make_unique<glBuffer>();
+        inst_VBO = std::make_unique<glBuffer>();
         IBO = std::make_unique<glBuffer>();
         VBOInitialized = false;
         IBOInitialized = false;
+        instancesInitialized = false;
         VAO = std::make_unique<glVertexArray>();
         glGenVertexArrays(1, &VAO->ID);
         GLGEN_LOG("Generated Vertex Array " << VAO->ID);
@@ -93,17 +97,21 @@ public:
     Mesh<T, I>& operator=(const Mesh<T, I>& p_other) {
         m_verts = p_other.m_verts;
         m_indices = p_other.m_indices;
+        m_instances = p_other.m_instances;
         m_attribList = p_other.m_attribList;
         m_singleVertexSize = p_other.m_singleVertexSize;
+        m_singleInstanceSize = p_other.m_singleInstanceSize;
         m_GPUVertCount = p_other.m_GPUVertCount;
         m_streamType = p_other.m_streamType;
 
         // We can't copy these, so we have to create new opengl buffers. Copying is discouraged.
         GLGEN_LOG("Copied mesh! VAO: " << p_other.VAO->ID);
         vert_VBO = std::make_unique<glBuffer>();
+        inst_VBO = std::make_unique<glBuffer>();
         IBO = std::make_unique<glBuffer>();
         VBOInitialized = false;
         IBOInitialized = false;
+        instancesInitialized = false;
         VAO = std::make_unique<glVertexArray>();
         glGenVertexArrays(1, &VAO->ID);
         GLGEN_LOG("Generated Vertex Array " << VAO->ID);
@@ -114,14 +122,21 @@ public:
     Mesh<T, I>& operator=(Mesh<T, I>&& p_other) noexcept {
         m_verts = p_other.m_verts;
         m_indices = p_other.m_indices;
+        m_instances = p_other.m_instances;
         m_attribList = p_other.m_attribList;
         m_singleVertexSize = p_other.m_singleVertexSize;
+        m_singleInstanceSize = p_other.m_singleInstanceSize;
         m_GPUVertCount = p_other.m_GPUVertCount;
         m_streamType = p_other.m_streamType;
+        VBOInitialized = p_other.VBOInitialized;
+        IBOInitialized = p_other.IBOInitialized;
+        instancesInitialized = p_other.instancesInitialized;
+        usingInstancing = p_other.usingInstancing;
 
         GLGEN_LOG("Moved mesh! VAO: " << p_other.VAO->ID);
 
         vert_VBO = std::move(p_other.vert_VBO);
+        inst_VBO = std::move(p_other.inst_VBO);
         VAO = std::move(p_other.VAO);
         IBO = std::move(p_other.IBO);
 
@@ -132,16 +147,21 @@ public:
     Mesh(Mesh&& p_other) noexcept :
         m_verts(p_other.m_verts),
         m_indices(p_other.m_indices),
+        m_instances(p_other.m_instances),
         m_attribList(p_other.m_attribList),
         m_singleVertexSize(p_other.m_singleVertexSize),
+        m_singleInstanceSize(p_other.m_singleInstanceSize),
         m_GPUVertCount(p_other.m_GPUVertCount),
         m_streamType(p_other.m_streamType),
         VBOInitialized(p_other.VBOInitialized),
-        IBOInitialized(p_other.IBOInitialized)
+        IBOInitialized(p_other.IBOInitialized),
+        instancesInitialized(p_other.instancesInitialized),
+        usingInstancing(p_other.usingInstancing)
     {
         GLGEN_LOG("Moved mesh! VAO: " << p_other.VAO->ID);
 
         vert_VBO = std::move(p_other.vert_VBO);
+        inst_VBO = std::move(p_other.inst_VBO);
         VAO = std::move(p_other.VAO);
         IBO = std::move(p_other.IBO);
 
@@ -308,6 +328,7 @@ public:
     size_t getStoredVertCount() { return m_verts.size(); }
     size_t instanceCount() { return m_instances.size(); }
     GLuint* getIBOPointer() { return m_indices.data(); }
+    I* getInstancePointer(size_t p_index = 0) { return &m_instances[p_index]; };
 
     void pushVBOToGPU() {
         if (isFeedbackMesh) return;
@@ -361,7 +382,6 @@ public:
             setInstancePointers();
         }
 
-
         glEnableVertexAttribArray(0);
     }
     void pushIBOToGPU() {
@@ -395,6 +415,7 @@ public:
         glCheck(glBufferSubData(GL_ARRAY_BUFFER, 0, m_verts.size() * sizeof(T), m_verts.data()));
         glBindVertexArray(0);
     }
+    // NOTE: endIndex is not inclusive, so setting start and end to the same value will not affect any data, make sure end is at least one greater than start
     void subVBOData(GLuint p_startIndex, GLuint p_endIndex, T* p_data) {
         if (isFeedbackMesh) return;
         glCheck(glBindVertexArray(VAO->ID));
@@ -419,6 +440,7 @@ public:
         glCheck(glBufferSubData(GL_ARRAY_BUFFER, 0, m_instances.size() * sizeof(I), m_instances.data()));
         glBindVertexArray(0);
     }
+    // NOTE: endIndex is not inclusive, so setting start and end to the same value will not affect any data, make sure end is at least one greater than start
     void subInstanceData(GLuint p_startIndex, GLuint p_endIndex, I* p_data) {
         if (!instancesInitialized || !usingInstancing) {
             ERROR_LOG("You forgot to give the mesh any instances in the first place.");
@@ -428,6 +450,7 @@ public:
         glCheck(glBindBuffer(GL_ARRAY_BUFFER, inst_VBO->ID));
         glCheck(glBufferSubData(GL_ARRAY_BUFFER, p_startIndex * sizeof(I), (p_endIndex - p_startIndex) * sizeof(I), p_data));
     }
+
     void resetGPUCounts() {
         m_GPUVertCount = 0;
         m_GPUIndicesCount = 0;
@@ -445,6 +468,13 @@ public:
         m_verts = std::vector<T>();
         m_indices = std::vector<GLuint>();
         m_instances = std::vector<I>();
+        vert_VBO->~glBuffer();
+        inst_VBO->~glBuffer();
+        IBO->~glBuffer();
+        VBOInitialized = false;
+        IBOInitialized = false;
+        usingInstancing = false;
+        instancesInitialized = false;
     };
 
     std::vector<T>& getVerts() {

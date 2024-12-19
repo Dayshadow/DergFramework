@@ -13,5 +13,4 @@
 #include "Framework/Graphics/Camera.hpp"
 #include "Framework/Graphics/UniformArray.hpp"
 #include "Framework/Graphics/UniformBlock.hpp"
-#include "Framework/Graphics/GenericMeshes.hpp"
 #include "Framework/Graphics/GenericShaders.hpp"

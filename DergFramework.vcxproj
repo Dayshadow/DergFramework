@@ -208,7 +208,6 @@ OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClInclude Include="include\Framework\Graphics\DrawStates.hpp" />
     <ClInclude Include="include\Framework\Graphics\DrawSurface.hpp" />
     <ClInclude Include="include\Framework\Graphics\FrameBuffer.hpp" />
-    <ClInclude Include="include\Framework\Graphics\GenericMeshes.hpp" />
     <ClInclude Include="include\Framework\Graphics\GenericShaders.hpp" />
     <ClInclude Include="include\Framework\Graphics\GlCheck.hpp" />
     <ClInclude Include="include\Framework\Graphics\GlIDs.hpp" />
