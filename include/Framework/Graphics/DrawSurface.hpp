@@ -69,20 +69,19 @@ public:
 				}
 				else {
 					if (p_primitiveType == GL_TRIANGLES)
-						glCheck(glDrawArraysInstanced(p_primitiveType, 0, (GLsizei)p_mesh.getCapturedPrimitiveCount() * (GLsizei)3, p_mesh.instanceCount()));
+						glCheck(glDrawArraysInstanced(p_primitiveType, 0, static_cast<GLsizei>(p_mesh.getCapturedPrimitiveCount() * 3), p_mesh.instanceCount()));
 					else if (p_primitiveType == GL_LINES)
-						glCheck(glDrawArraysInstanced(p_primitiveType, 0, (GLsizei)p_mesh.getCapturedPrimitiveCount() * (GLsizei)2, p_mesh.instanceCount()));
-					else {
-						glCheck(glDrawArraysInstanced(p_primitiveType, 0, (GLsizei)p_mesh.getCapturedPrimitiveCount(), p_mesh.instanceCount()));
-					}
+						glCheck(glDrawArraysInstanced(p_primitiveType, 0, static_cast<GLsizei>(p_mesh.getCapturedPrimitiveCount() * 2), p_mesh.instanceCount()));
+					else 
+						glCheck(glDrawArraysInstanced(p_primitiveType, 0, static_cast<GLsizei>(p_mesh.getCapturedPrimitiveCount()), p_mesh.instanceCount()));
 				}
 
 			}
 			else {
 				if (!p_mesh.instancesInitialized)
-					glCheck(glDrawArrays(p_primitiveType, 0, (GLsizei)p_mesh.getTotalVBOSize()));
+					glCheck(glDrawArrays(p_primitiveType, 0, static_cast<GLsizei>(p_mesh.getTotalVBOSize())));
 				else
-					glCheck(glDrawArraysInstanced(p_primitiveType, 0, (GLsizei)p_mesh.getTotalVBOSize(), p_mesh.instanceCount()));
+					glCheck(glDrawArraysInstanced(p_primitiveType, 0, static_cast<GLsizei>(p_mesh.getTotalVBOSize()), p_mesh.instanceCount()));
 
 			}
 
@@ -123,7 +122,7 @@ public:
 	{
 		useViewport();
 		glCheck(glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer->ID));
-		glCheck(glDrawBuffers((GLsizei)m_DrawBuffers.size(), (const GLenum*)m_DrawBuffers.data()));
+		glCheck(glDrawBuffers(static_cast<GLsizei>(m_DrawBuffers.size()), (const GLenum*)m_DrawBuffers.data()));
 	};
 	glm::ivec4 getViewport() {
 		return m_viewport;

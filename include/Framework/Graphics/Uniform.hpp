@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <GL/glew.h>
+//#include <GL/glew.h>
 #include <util/ext/glm/glm.hpp>
 
 // shrimple dimple
@@ -33,8 +33,8 @@ struct Uniform {
 	// the int value is shared by tex, bool, and int types because they are indistinguishable
 	// Might make this a union later, but mat4 is substantially bigger so idk
 	union {
-		GLint intValue;
-		GLuint uintValue;
+		int32_t intValue;
+		uint32_t uintValue;
 		GLfloat floatValue;
 		glm::vec2 vec2Value;
 		glm::vec3 vec3Value;
@@ -43,7 +43,7 @@ struct Uniform {
 	};
 
 	const std::string name;
-	GLint loc = 0;
+	int32_t loc = 0;
 	// Type determines which internal type the shader should fetch. 
 	UniformTypes type = UniformTypes::UNDEFINED;
 };

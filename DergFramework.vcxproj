@@ -115,6 +115,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\dev\glew-2.2.0\include;C:\dev\SDL2\include;$(ProjectDir)include;$(ProjectDir)src;$(ProjectDir)include\util\ext;$(ProjectDir)imgui;$(ProjectDir)include\Framework\Graphics\GUI_Experimental;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <DisableSpecificWarnings>4267</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,7 +143,7 @@ al-excommon.lib;
 OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>C:\dev\glew-2.2.0\lib\Release\x64;C:\dev\SDL2\lib\x64;$(ProjectDir)lib;$(ProjectDir)lib\debug\OpenAL;$(ProjectDir)lib\debug\box2d;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\dev\glew-2.2.0\lib\Release\x64;C:\dev\SDL2\lib\x64;$(ProjectDir)lib\debug\OpenAL;$(ProjectDir)lib\release\box2d;$(ProjectDir)lib\freetype</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -155,6 +156,7 @@ OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\dev\glew-2.2.0\include;C:\dev\SDL2\include;$(ProjectDir)include;$(ProjectDir)src;$(ProjectDir)include\util\ext;$(ProjectDir)imgui;$(ProjectDir)include\Framework\Graphics\GUI_Experimental;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <DisableSpecificWarnings>4267</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -173,7 +175,7 @@ OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\dev\glew-2.2.0\lib\Release\x64;C:\dev\SDL2\lib\x64;$(ProjectDir)lib;$(ProjectDir)lib\release\OpenAL;$(ProjectDir)lib\release\box2d;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>C:\dev\glew-2.2.0\lib\Release\x64;C:\dev\SDL2\lib\x64;$(ProjectDir)lib;$(ProjectDir)lib\release\OpenAL;$(ProjectDir)lib\release\box2d;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\dev\glew-2.2.0\lib\Release\x64\;C:\dev\SDL2\lib\x64\;$(ProjectDir)lib\release\OpenAL\;$(ProjectDir)lib\release\box2d\;$(ProjectDir)lib\freetype\</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib
 ;SDL2main.lib
 ;glew32.lib;
@@ -183,6 +185,7 @@ glu32.lib
 ;alcommon.lib;
 al-excommon.lib;
 OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions />
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -242,6 +245,12 @@ OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClInclude Include="include\util\ext\AL\efx.h" />
     <ClInclude Include="include\util\ext\AudioFile.h" />
     <ClInclude Include="include\util\Concepts.hpp" />
+    <ClInclude Include="include\util\ext\box2d\base.h" />
+    <ClInclude Include="include\util\ext\box2d\box2d.h" />
+    <ClInclude Include="include\util\ext\box2d\collision.h" />
+    <ClInclude Include="include\util\ext\box2d\id.h" />
+    <ClInclude Include="include\util\ext\box2d\math_functions.h" />
+    <ClInclude Include="include\util\ext\box2d\types.h" />
     <ClInclude Include="include\util\ext\freetype\config\ftconfig.h" />
     <ClInclude Include="include\util\ext\freetype\config\ftheader.h" />
     <ClInclude Include="include\util\ext\freetype\config\ftmodule.h" />
@@ -610,6 +619,9 @@ OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="include\util\ext\glm\detail\glm.cpp" />
+    <ClCompile Include="src\Framework\Audio\audioimmediate.cpp" />
+    <ClCompile Include="src\Framework\Audio\samplemanip.cpp" />
+    <ClCompile Include="src\Framework\Audio\wav.cpp" />
     <ClCompile Include="src\Framework\Graphics\camera.cpp" />
     <ClCompile Include="src\Framework\Graphics\drawstates.cpp" />
     <ClCompile Include="src\Framework\Graphics\framebuffer.cpp" />

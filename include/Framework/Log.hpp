@@ -7,7 +7,7 @@
 #define ERROR_LOG(expr) std::cout << "\n[ERROR]:   " << expr << "\n\n";
 
 // A bit messy but obvious
-#ifdef ERROR_LOG
+#if 1
 
 // handy disableable specifications
 #ifdef LOADLOGGING_ENABLED
@@ -28,6 +28,12 @@
 #define GLGEN_LOG(expr)
 #endif
 
+#ifdef ALGENLOGGING_ENABLED
+#define ALGEN_LOG(expr) std::cout << "[OpenAL]: " << expr << "\n"
+#else
+#define ALGEN_LOG(expr)
+#endif
+
 // general log macro without a toggle
 #define LOG(expr) std::cout << "[INFO]: " << expr << std::endl
 #define CONDITIONAL_LOG(cond, expr) if (cond) std::cout << expr << '\n'
@@ -42,5 +48,6 @@
 #define LOAD_LOG(expr)
 #define DELETE_LOG(expr)
 #define GLGEN_LOG(expr)
+#define ALGEN_LOG(expr)
 
 #endif
