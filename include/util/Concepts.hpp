@@ -16,3 +16,11 @@ concept IsVarArray = requires(T matchType, Args... args) {
     requires std::conjunction_v<std::is_same<T, Args>...>;
     requires sizeof...(args) == count;
 };
+
+//template<typename T>
+//concept AreAllSame = true;
+
+template<typename T, typename... Rest>
+concept AreAllSame = requires {
+    requires std::conjunction_v<std::is_same<T, Rest>...>;
+};
