@@ -4,7 +4,7 @@
 // runs once when things initialize to help trace where the program fails
 #define LOADLOGGING_ENABLED
 // logs whenever many things are deleted. used to catch memory leaks
-//#define DELETELOGGING_ENABLED
+#define DELETELOGGING_ENABLED
 // logs EVERY buffer made by opengl, only for extreme debugging use
 #define GLGENLOGGING_ENABLED 
 

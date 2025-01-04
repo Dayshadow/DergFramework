@@ -127,7 +127,9 @@ public:
         m_singleVertexSize = p_other.m_singleVertexSize;
         m_singleInstanceSize = p_other.m_singleInstanceSize;
         m_GPUVertCount = p_other.m_GPUVertCount;
+        m_GPUIndicesCount = p_other.m_GPUIndicesCount;
         m_streamType = p_other.m_streamType;
+        VAOInitialized = p_other.VAOInitialized;
         VBOInitialized = p_other.VBOInitialized;
         IBOInitialized = p_other.IBOInitialized;
         instancesInitialized = p_other.instancesInitialized;
@@ -152,7 +154,9 @@ public:
         m_singleVertexSize(p_other.m_singleVertexSize),
         m_singleInstanceSize(p_other.m_singleInstanceSize),
         m_GPUVertCount(p_other.m_GPUVertCount),
+        m_GPUIndicesCount(p_other.m_GPUIndicesCount),
         m_streamType(p_other.m_streamType),
+        VAOInitialized(p_other.VAOInitialized),
         VBOInitialized(p_other.VBOInitialized),
         IBOInitialized(p_other.IBOInitialized),
         instancesInitialized(p_other.instancesInitialized),
