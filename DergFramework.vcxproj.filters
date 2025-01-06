@@ -1795,5 +1795,7 @@
     <Library Include="lib\release\OpenAL\OpenAL32.lib" />
     <Library Include="lib\freetype.lib" />
     <Library Include="lib\debug\box2d\box2d.lib" />
+    <Library Include="lib\release\box2d\box2d.lib" />
+    <Library Include="lib\freetype\freetype.lib" />
   </ItemGroup>
 </Project>
