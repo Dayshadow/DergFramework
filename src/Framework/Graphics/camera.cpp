@@ -8,12 +8,33 @@ Camera::Camera():
 	tileScale(20.f)
 {
 	glm::vec3 direction = glm::normalize(pos - m_target);
-	Camera::m_right = glm::normalize(glm::cross(m_upGuide, direction));
-	Camera::m_up = glm::cross(direction, m_right);
+	glm::vec3 m_right = glm::normalize(glm::cross(m_upGuide, direction));
+	glm::vec3 m_up = glm::cross(direction, m_right);
 	Camera::m_forward = glm::cross(m_right, m_up); // forward calculate normalized forward facing vector
 	lookForwards();
 	updateFrame();
 
+}
+
+Camera& Camera::operator=(const Camera& p_other)
+{
+	pos = p_other.pos;
+	view = p_other.view;
+	m_target = p_other.m_target;
+	tileScale = p_other.tileScale;
+	zRotation = p_other.zRotation;
+
+	lastVelocity = p_other.lastVelocity;
+	apparentPos = p_other.apparentPos;
+	m_dimensions = p_other.m_dimensions;
+	m_pixelDimensions = p_other.m_pixelDimensions;
+	m_frame = p_other.m_frame;
+	m_manualView = p_other.m_manualView;
+	m_perspective = p_other.m_perspective;
+	m_interpolation = p_other.m_interpolation;
+	m_disableAutoFrame = p_other.m_disableAutoFrame;
+
+	return *this;
 }
 
 Camera::Camera(glm::vec3 p_pos) :
@@ -23,8 +44,8 @@ Camera::Camera(glm::vec3 p_pos) :
 	tileScale(20.f)
 {
 	glm::vec3 direction = glm::normalize(pos - m_target);
-	Camera::m_right = glm::normalize(glm::cross(m_upGuide, direction));
-	Camera::m_up = glm::cross(direction, m_right);
+	glm::vec3 m_right = glm::normalize(glm::cross(m_upGuide, direction));
+	glm::vec3 m_up = glm::cross(direction, m_right);
 	Camera::m_forward = glm::cross(m_right, m_up); // forward calculate normalized forward facing vector
 	apparentPos = p_pos;
 	lookForwards();

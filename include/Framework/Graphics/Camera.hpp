@@ -24,6 +24,8 @@ public:
 	*/
 	Camera();
 
+	Camera& operator=(const Camera& p_other);
+
 	/**
 	* @overload Camera(glm::vec3 p_pos)
 	*
@@ -164,8 +166,6 @@ public:
 private:
 	/// used for lookAt and lookForwards, represents a position the camera is targeting.
 	glm::vec3 m_target;
-	glm::vec3 m_right; /* Used within constructor. The vector facing right relative to the camera's view. */
-	glm::vec3 m_up; /* Used within constructor. The vector facing upwards relative to the camera's view */
 	glm::vec3 m_forward; /* Used within constructor, represents the vector pointing straight out from the middle of the camera view. */
 	glm::mat4 m_proj;
 	/// Camera dimensions. Best normalized to the aspect ratio of the window. X is width, Y is height.
