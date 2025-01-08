@@ -53,7 +53,7 @@ public:
 			if (!p_mesh.instancesInitialized)
 				glCheck(glDrawElements(p_primitiveType, (GLsizei)p_mesh.getTotalIBOSize(), GL_UNSIGNED_INT, 0));
 			else
-				glCheck(glDrawElementsInstanced(p_primitiveType, (GLsizei)p_mesh.getTotalIBOSize(), GL_UNSIGNED_INT, 0, p_mesh.instanceCount()));
+				glCheck(glDrawElementsInstanced(p_primitiveType, (GLsizei)p_mesh.getTotalIBOSize(), GL_UNSIGNED_INT, 0, (GLsizei)p_mesh.instanceCount()));
 		}
 		else {
 			if (p_mesh.isFeedbackMesh) {
@@ -69,11 +69,11 @@ public:
 				}
 				else {
 					if (p_primitiveType == GL_TRIANGLES)
-						glCheck(glDrawArraysInstanced(p_primitiveType, 0, static_cast<GLsizei>(p_mesh.getCapturedPrimitiveCount() * 3), p_mesh.instanceCount()));
+						glCheck(glDrawArraysInstanced(p_primitiveType, 0, static_cast<GLsizei>(p_mesh.getCapturedPrimitiveCount() * 3), static_cast<GLsizei>(p_mesh.instanceCount())));
 					else if (p_primitiveType == GL_LINES)
-						glCheck(glDrawArraysInstanced(p_primitiveType, 0, static_cast<GLsizei>(p_mesh.getCapturedPrimitiveCount() * 2), p_mesh.instanceCount()));
+						glCheck(glDrawArraysInstanced(p_primitiveType, 0, static_cast<GLsizei>(p_mesh.getCapturedPrimitiveCount() * 2), static_cast<GLsizei>(p_mesh.instanceCount())));
 					else 
-						glCheck(glDrawArraysInstanced(p_primitiveType, 0, static_cast<GLsizei>(p_mesh.getCapturedPrimitiveCount()), p_mesh.instanceCount()));
+						glCheck(glDrawArraysInstanced(p_primitiveType, 0, static_cast<GLsizei>(p_mesh.getCapturedPrimitiveCount()), static_cast<GLsizei>(p_mesh.instanceCount())));
 				}
 
 			}
@@ -81,7 +81,7 @@ public:
 				if (!p_mesh.instancesInitialized)
 					glCheck(glDrawArrays(p_primitiveType, 0, static_cast<GLsizei>(p_mesh.getTotalVBOSize())));
 				else
-					glCheck(glDrawArraysInstanced(p_primitiveType, 0, static_cast<GLsizei>(p_mesh.getTotalVBOSize()), p_mesh.instanceCount()));
+					glCheck(glDrawArraysInstanced(p_primitiveType, 0, static_cast<GLsizei>(p_mesh.getTotalVBOSize()), static_cast<GLsizei>(p_mesh.instanceCount())));
 
 			}
 

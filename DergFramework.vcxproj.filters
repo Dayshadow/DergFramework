@@ -1787,14 +1787,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="lib\debug\OpenAL\OpenAL32.lib" />
-    <Library Include="lib\debug\OpenAL\alcommon.lib" />
-    <Library Include="lib\debug\OpenAL\al-excommon.lib" />
     <Library Include="lib\release\OpenAL\alcommon.lib" />
     <Library Include="lib\release\OpenAL\al-excommon.lib" />
     <Library Include="lib\release\OpenAL\OpenAL32.lib" />
-    <Library Include="lib\debug\box2d\box2d.lib" />
     <Library Include="lib\release\box2d\box2d.lib" />
     <Library Include="lib\freetype\freetype.lib" />
+    <Library Include="lib\debug\OpenAL\alcommond.lib" />
+    <Library Include="lib\debug\OpenAL\al-excommond.lib" />
+    <Library Include="lib\debug\OpenAL\OpenAL32d.lib" />
   </ItemGroup>
 </Project>

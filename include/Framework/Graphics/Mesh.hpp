@@ -359,8 +359,8 @@ public:
         glEnableVertexAttribArray(0);
 
         // keep it thread-accurate
-        m_GPUVertCount = (m_verts.size() * sizeof(T)) / m_singleVertexSize;
-        m_GPUIndicesCount = m_indices.size();
+        m_GPUVertCount = uint32_t(m_verts.size() * sizeof(T)) / m_singleVertexSize;
+        m_GPUIndicesCount = (uint32_t)m_indices.size();
     };
 
     void pushInstancesToGPU() {
