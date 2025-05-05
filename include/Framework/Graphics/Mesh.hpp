@@ -174,7 +174,7 @@ public:
     void reserve(size_t p_reserveAmount) { m_verts.reserve(p_reserveAmount); }
 
     void setStreamType(GLenum p_type) {
-#ifdef SBBB_DEBUG
+#ifdef _DEBUG
         if (!(p_type == GL_STREAM_DRAW || p_type == GL_DYNAMIC_DRAW || p_type == GL_STATIC_DRAW)) {
             throw std::runtime_error("Used an invalid enum to set a stream type.");
             return;

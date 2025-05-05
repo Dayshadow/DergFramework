@@ -31,7 +31,7 @@ public:
 	}
 	
 	T& operator()(int x, int y) {
-#ifdef SBBB_DEBUG
+#ifdef _DEBUG
 		if (!bounded(x, y)) {
 			throw std::out_of_range("2D Array index out of bounds.");
 		}
@@ -40,7 +40,7 @@ public:
 	}
 
 	T operator()(int x, int y) const {
-#ifdef SBBB_DEBUG
+#ifdef _DEBUG
 		if (!bounded(x, y)) {
 			throw std::out_of_range("2D Array index out of bounds.");
 		}

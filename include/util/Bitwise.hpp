@@ -16,7 +16,7 @@ struct Bitwise32 {
 	}
 	// end inclusive
 	void setRange(uint8_t p_startOffset, uint8_t p_endOffset, uint32_t p_value) {
-#ifdef SBBB_DEBUG
+#ifdef _DEBUG
 		if (p_endOffset > 31) {
 			ERROR_LOG("Bitwise setRange invalid! Endpoint is too high.");
 			throw std::exception("Bitwise overflow");
@@ -34,7 +34,7 @@ struct Bitwise32 {
 		packed |= (p_value << p_startOffset) & bitmask;
 	}
 	uint32_t unpackRange(uint8_t p_startOffset, uint8_t p_endOffset) {
-#ifdef SBBB_DEBUG
+#ifdef _DEBUG
 		if (p_endOffset > 31) {
 			ERROR_LOG("Bitwise unpackRange overflow!");
 			throw std::exception("Bitwise overflow");

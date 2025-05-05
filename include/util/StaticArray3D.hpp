@@ -31,7 +31,7 @@ public:
 	StaticArray3D<T> operator=(const StaticArray3D<T>& other) = delete;
 
 	T& operator()(size_t x, size_t y, size_t z) {
-#ifdef SBBB_DEBUG
+#ifdef _DEBUG
 		if (!bounded((int)x, (int)y, (int)z)) {
 			throw std::out_of_range("3D Array index out of bounds.");
 		}
