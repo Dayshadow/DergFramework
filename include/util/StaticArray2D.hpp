@@ -32,7 +32,7 @@ public:
 	StaticArray2D<T> operator=(const StaticArray2D<T>& other) = delete;
 
 	T& operator()(int x, int y) {
-#ifdef SBBB_DEBUG
+#ifdef _DEBUG
 		if (!bounded(x, y)) {
 			ERROR_LOG("Invalid Index (" << x << ", " << y << ")");
 			throw std::exception("2d array out of bounds");

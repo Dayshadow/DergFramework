@@ -159,10 +159,10 @@ namespace utils {
 				}
 
 				uint32_t num_pixels = n * n;
-				uint8_t avg_red = total_red / num_pixels;
-				uint8_t avg_green = total_green / num_pixels;
-				uint8_t avg_blue = total_blue / num_pixels;
-				uint8_t avg_alpha = total_alpha / num_pixels;
+				uint8_t avg_red = static_cast<uint8_t>(total_red / num_pixels);
+				uint8_t avg_green = static_cast<uint8_t>(total_green / num_pixels);
+				uint8_t avg_blue = static_cast<uint8_t>(total_blue / num_pixels);
+				uint8_t avg_alpha = static_cast<uint8_t>(total_alpha / num_pixels);
 
 				out[y * ((p_width * 4) / n) + x / n + 0] = avg_red;
 				out[y * ((p_width * 4) / n) + x / n + 1] = avg_green;

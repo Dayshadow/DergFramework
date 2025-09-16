@@ -7,7 +7,7 @@
 
 // ADAPTED FROM SFML
 
-#ifdef SBBB_DEBUG
+#ifdef _DEBUG
 
 #define glCheck(expr)                                      \
     do                                                     \

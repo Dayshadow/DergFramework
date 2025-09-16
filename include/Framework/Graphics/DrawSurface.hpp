@@ -20,8 +20,6 @@ public:
 	// Must be typenamed to T in order to accept any mesh vertex format, but everything that uses the template type is internal to mesh.
 	template<typename T, typename I = int>
 	void draw(Mesh<T, I>& p_mesh, GLenum p_primitiveType, DrawStates& p_states, bool p_selfBindShader = true) {
-#ifdef SBBB_DEBUG
-#endif
 		if (!p_states.checkIfInit()) return;
 
 		auto shader = p_states.m_shaderPtr;
