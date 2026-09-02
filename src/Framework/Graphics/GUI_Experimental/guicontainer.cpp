@@ -2,7 +2,7 @@
 
 GUIContainer::GUIContainer(std::string_view p_ID) : Widget(p_ID)
 {
-	m_backgroundSprite.attachShader(&gs.solidColorShader);
+	m_backgroundSprite.attachShader(&s_gs.solidColorShader);
 }
 
 void GUIContainer::draw(DrawSurface& p_target, DrawStates& p_states)
@@ -14,15 +14,15 @@ void GUIContainer::draw(DrawSurface& p_target, DrawStates& p_states)
 		m_backgroundSprite.setBounds(Rect(0.f, 0.f, absoluteBounds.wh.x, absoluteBounds.wh.y));
 		m_backgroundSprite.setPosition(glm::vec3(absoluteBounds.xy.x, absoluteBounds.xy.y, 1.f));
 		if (!m_win95Bg) {
-			gs.solidColorShader.setVec3Uniform(gs.solidColor_colorUniformLoc, backgroundColor);
-			gs.solidColorShader.setFloatUniform(gs.solidColor_opacityUniformLoc, backgroundOpacity);
+			s_gs.solidColorShader.setVec3Uniform(s_gs.solidColor_colorUniformLoc, backgroundColor);
+			s_gs.solidColorShader.setFloatUniform(s_gs.solidColor_opacityUniformLoc, backgroundOpacity);
 			m_backgroundSprite.draw(p_target, p_states);
-			gs.solidColorShader.setFloatUniform(gs.solidColor_opacityUniformLoc, 1.f);
+			s_gs.solidColorShader.setFloatUniform(s_gs.solidColor_opacityUniformLoc, 1.f);
 		}
 		else {
-			gs.win95Shader.setVec2Uniform(gs.win95_pixelBoundsUniformLoc, glm::vec2(absoluteBounds.wh.x * p_target.getViewportWidth(), absoluteBounds.wh.y * p_target.getViewportHeight()));
-			gs.win95Shader.setFloatUniform(gs.win95_opacityUniformLoc, backgroundOpacity);
-			m_backgroundSprite.attachShader(&gs.win95Shader);
+			s_gs.win95Shader.setVec2Uniform(s_gs.win95_pixelBoundsUniformLoc, glm::vec2(absoluteBounds.wh.x * p_target.getViewportWidth(), absoluteBounds.wh.y * p_target.getViewportHeight()));
+			s_gs.win95Shader.setFloatUniform(s_gs.win95_opacityUniformLoc, backgroundOpacity);
+			m_backgroundSprite.attachShader(&s_gs.win95Shader);
 			m_backgroundSprite.draw(p_target, p_states);
 		}
 	}
@@ -67,7 +67,7 @@ void GUIContainer::setImage(Texture& p_image, bool stretchToFit)
 {
 	m_imageAttached = true;
 	m_imageSprite.attachTexture(p_image);
-	m_imageSprite.attachShader(&gs.imageShader);
+	m_imageSprite.attachShader(&s_gs.imageShader);
 	if (stretchToFit) {
 		m_imageSprite.setBounds(Rect(0.f, 0.f, absoluteBounds.wh.x, absoluteBounds.wh.y));
 		m_stretchImage = true;

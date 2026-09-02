@@ -33,7 +33,7 @@ public:
 	bool autoScreenHeight = false;
 protected:
 	Text m_fieldText{ DefaultFonts.videotype, "" };
-	GenericShaders& gs = GenericShaders::Get();
+	GenericShaders& s_gs = GenericShaders::Get();
 	std::string m_textString;
 	Sprite m_backgroundSprite;
 	float m_textHeight = 50; // if not using relative scaling, it is pixel height. otherwise, 0-1.

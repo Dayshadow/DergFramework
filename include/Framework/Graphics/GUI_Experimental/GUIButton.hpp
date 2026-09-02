@@ -21,7 +21,7 @@ public:
 	glm::vec3 testColor{ 0.2f };
 	bool disabled = false;
 protected:
-	GenericShaders& gs = GenericShaders::Get();
+	GenericShaders& s_gs = GenericShaders::Get();
 	bool m_backgroundEnabled = false;
 	std::function<void()> onClickFunc;
 	std::function<void(bool)> onHoverFunc;

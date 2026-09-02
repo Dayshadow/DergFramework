@@ -150,7 +150,7 @@ public:
 
 	void disableAutoFrame() { m_disableAutoFrame = true; }
 
-	glm::vec2 pixelToTileCoordinates(float p_pixelX, float p_pixelY);
+	glm::vec2 pixelToTileCoordinates(int32_t p_pixelX, int32_t p_pixelY);
 	glm::vec2 tileToPixelCoordinates(float p_tileX, float p_tileY);
 
 	/// Tile scale is a value representing the amount of tiles on the longest axis.

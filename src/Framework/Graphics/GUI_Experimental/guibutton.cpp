@@ -27,13 +27,13 @@ void GUIButton::draw(DrawSurface& p_target, DrawStates& p_states)
 	if (m_backgroundEnabled) {
 		m_sprite.setBounds(Rect(0.f, 0.f, absoluteBounds.wh.x, absoluteBounds.wh.y));
 		m_sprite.setPosition(glm::vec3(absoluteBounds.xy.x, absoluteBounds.xy.y, 1.f));
-		gs.solidColorShader.setVec3Uniform(gs.solidColor_colorUniformLoc, testColor);
-		gs.solidColorShader.setFloatUniform(gs.solidColor_opacityUniformLoc, 0.5f);
+		s_gs.solidColorShader.setVec3Uniform(s_gs.solidColor_colorUniformLoc, testColor);
+		s_gs.solidColorShader.setFloatUniform(s_gs.solidColor_opacityUniformLoc, 0.5f);
 	}
 	//GenericShaders::Get().fancyShader.setFloatUniform(1, SDL_GetTicks() / 1000.f);
 
 	m_sprite.draw(p_target, p_states);
-	gs.solidColorShader.setFloatUniform(gs.solidColor_opacityUniformLoc, 1.f);
+	s_gs.solidColorShader.setFloatUniform(s_gs.solidColor_opacityUniformLoc, 1.f);
 	Widget::draw(p_target, p_states);
 }
 

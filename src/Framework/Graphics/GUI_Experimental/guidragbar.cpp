@@ -9,10 +9,10 @@ void GUIDragBar::draw(DrawSurface& p_target, DrawStates& p_states)
 	if (m_backgroundEnabled) {
 		m_backgroundSprite.setBounds(Rect(0.f, 0.f, absoluteBounds.wh.x, absoluteBounds.wh.y));
 		m_backgroundSprite.setPosition(glm::vec3(absoluteBounds.xy.x, absoluteBounds.xy.y, 1.f));
-		gs.solidColorShader.setVec3Uniform(gs.solidColor_colorUniformLoc, backgroundColor);
-		gs.solidColorShader.setFloatUniform(gs.solidColor_opacityUniformLoc, backgroundOpacity);
+		s_gs.solidColorShader.setVec3Uniform(s_gs.solidColor_colorUniformLoc, backgroundColor);
+		s_gs.solidColorShader.setFloatUniform(s_gs.solidColor_opacityUniformLoc, backgroundOpacity);
 		m_backgroundSprite.draw(p_target, p_states);
-		gs.solidColorShader.setFloatUniform(gs.solidColor_opacityUniformLoc, 1.f);
+		s_gs.solidColorShader.setFloatUniform(s_gs.solidColor_opacityUniformLoc, 1.f);
 	}
 	Widget::draw(p_target, p_states);
 }

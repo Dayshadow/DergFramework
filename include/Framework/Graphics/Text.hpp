@@ -88,6 +88,6 @@ private:
 	float m_normalizedWidth = 0.f;
 	float m_normalizedHeight = 0.f;
 	float m_normalizedLineHeight = 0.f;
-	GenericShaders& gs = GenericShaders::Get();
+	GenericShaders& s_gs = GenericShaders::Get();
 	//static Shader textShader;
 };

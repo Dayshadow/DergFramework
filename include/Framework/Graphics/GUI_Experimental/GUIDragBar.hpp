@@ -20,7 +20,7 @@ public:
 	glm::vec3 backgroundColor{ 0.2f };
 	float backgroundOpacity = 1.f;
 protected:
-	GenericShaders& gs = GenericShaders::Get();
+	GenericShaders& s_gs = GenericShaders::Get();
 	Sprite m_backgroundSprite;
 	// offsets for keeping track of where it was first clicked relative to origin
 	glm::vec2 initOffset{ 0.f };

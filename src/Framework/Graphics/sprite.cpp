@@ -42,10 +42,10 @@ void Sprite::initForDraw()
 		br.x, br.y, 0.0f, 1.0f, 1.0f // vertex 6
 		});
 
-	auto& gs = GenericShaders::Get();
+	auto& s_gs = GenericShaders::Get();
 	// default shader
 	if (!m_attachedShader)
-		m_attachedShader = &gs.imageShader;
+		m_attachedShader = &s_gs.imageShader;
 
 	m_spriteMesh.pushVBOToGPU();
 	m_drawReady = true;

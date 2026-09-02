@@ -27,7 +27,7 @@ protected:
 	bool m_stretchImage = false;
 	bool m_win95Bg = false;
 	Corner m_imageCorner;
-	GenericShaders& gs = GenericShaders::Get();
+	GenericShaders& s_gs = GenericShaders::Get();
 	Sprite m_backgroundSprite{ glm::vec3(absoluteBounds.xy.x, absoluteBounds.xy.y, 0.f), Rect(0.f, 0.f, absoluteBounds.wh.x, absoluteBounds.wh.y) };
 	Sprite m_imageSprite{ glm::vec3(absoluteBounds.xy.x, absoluteBounds.xy.y, 0.f), Rect(0.f, 0.f, absoluteBounds.wh.x, absoluteBounds.wh.y) };
 };

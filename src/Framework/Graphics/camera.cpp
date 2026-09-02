@@ -209,7 +209,7 @@ void Camera::interpolate(float rate)
 //	glm::vec3 newPos = pos + lastVelocity * p_alpha * dt;
 //	setApparentPos(newPos.x, newPos.y);
 //}
-glm::vec2 Camera::pixelToTileCoordinates(float p_pixelX, float p_pixelY)
+glm::vec2 Camera::pixelToTileCoordinates(int32_t p_pixelX, int32_t p_pixelY)
 {
 	getTransform();
 	// normalized screen coordinates
