@@ -33,7 +33,7 @@ public:
 	/// Attaches GL to SDL window
 	void initGL();
 	/// Deletes the window when we are done using it.
-	void cleanUp();
+	void clean_up();
 	/**
 	* @returns The refresh rate of the screen the window is on.
 	*/
