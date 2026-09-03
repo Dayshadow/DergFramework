@@ -1,7 +1,7 @@
 #include "Framework/Graphics/TransformObject.hpp"
 #include <cmath>
 #include <util/ext/glm/gtc/matrix_transform.hpp>
-
+#include "util/utils.hpp"
 
 const float fwrapUnsigned(float x, float r) {
 	float aR = std::fabs(r); // The wrapping point should always be positive or else weird things happen
@@ -19,6 +19,7 @@ TransformObject::TransformObject() :
 	m_position(glm::vec3(0.f, 0.f, 0.f)),
 	apparentPos(glm::vec3(0.f)),
 	m_rotation(0.f),
+	apparentRot(0.f),
 	m_rotationAxis(glm::vec3(0.f, 0.f, 1.f)),
 	m_scale(glm::vec2(1.f, 1.f)),
 	m_transform(glm::mat4(1.f))
@@ -135,4 +136,16 @@ void TransformObject::enableTransformInterpolation()
 void TransformObject::disableTransformInterpolation()
 {
 	m_useInterpolation = false;
+}
+
+void TransformObject::basicInterpolate(uint32_t p_updateRate, uint32_t p_refreshRate)
+{
+	const float INTERP_FACTOR = (float(p_updateRate) / float(p_refreshRate)) / 2.f;
+	apparentPos = utils::lerp(apparentPos, getPosition(), INTERP_FACTOR);
+
+	double angleDiff = fmod((double)getRotation() - (double)apparentRot + 3.0 * M_PI, 2.0 * M_PI) - M_PI;
+	double angle = apparentRot + INTERP_FACTOR * angleDiff;
+	angle += (angle < 0) ? 2.f * M_PI : -2.f * M_PI;
+	apparentRot = (float)angle;
+	m_transformOutOfDate = true;
 }

@@ -58,6 +58,8 @@ public:
 	void enableTransformInterpolation();
 	void disableTransformInterpolation();
 
+	void basicInterpolate(uint32_t p_updateRate, uint32_t p_refreshRate);
+
 	glm::vec3 apparentPos;
 	float apparentRot;
 protected:
