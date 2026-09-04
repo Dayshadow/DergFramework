@@ -41,6 +41,9 @@ public:
 
 	// Used to enable and disable the framerate limit.
 	void setVSync(bool p_enabled);
+
+	void setTitle(const char* newTitle);
+
 	// Swaps the doublebuffer, and shows the new frame.
 	void displayNewFrame();
 

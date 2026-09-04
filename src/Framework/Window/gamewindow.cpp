@@ -117,6 +117,9 @@ void GameWindow::setVSync(bool p_enabled)
 {
 	SDL_GL_SetSwapInterval((int)p_enabled);
 }
+void GameWindow::setTitle(const char* p_newTitle) {
+	SDL_SetWindowTitle(m_window, p_newTitle);
+}
 void GameWindow::displayNewFrame()
 {
 	SDL_GL_SwapWindow(m_window); // Swap the back of the double buffer with the front.

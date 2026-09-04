@@ -127,17 +127,16 @@
 ;glew32.lib;
 glu32.lib
 ;opengl32.lib
-;box2d.lib
 ;alcommon.lib;
 al-excommon.lib;
 OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\dev\glew-2.2.0\lib\Release\x64;C:\dev\SDL2\lib\x64;$(ProjectDir)lib;$(ProjectDir)lib\debug\OpenAL;$(ProjectDir)lib\debug\box2d;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;glu32.lib;opengl32.lib;box2d.lib;alcommond.lib;al-excommond.lib;OpenAL32d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;glu32.lib;opengl32.lib;alcommond.lib;al-excommond.lib;OpenAL32d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>C:\dev\glew-2.2.0\lib\Release\x64;C:\dev\SDL2\lib\x64;$(ProjectDir)lib\debug\OpenAL;$(ProjectDir)lib\release\box2d;$(ProjectDir)lib\freetype</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\dev\glew-2.2.0\lib\Release\x64;C:\dev\SDL2\lib\x64;$(ProjectDir)lib\debug\OpenAL;$(ProjectDir)lib\freetype</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -163,17 +162,19 @@ OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
 ;glew32.lib;
 glu32.lib
 ;opengl32.lib
-;box2d.lib
 ;alcommon.lib;
 al-excommon.lib;
 OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\dev\glew-2.2.0\lib\Release\x64;C:\dev\SDL2\lib\x64;$(ProjectDir)lib;$(ProjectDir)lib\release\OpenAL;$(ProjectDir)lib\release\box2d;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>C:\dev\glew-2.2.0\lib\Release\x64\;C:\dev\SDL2\lib\x64\;$(ProjectDir)lib\release\OpenAL\;$(ProjectDir)lib\release\box2d\;$(ProjectDir)lib\freetype\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;glu32.lib;opengl32.lib;box2d.lib;alcommon.lib;al-excommon.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\dev\glew-2.2.0\lib\Release\x64\;C:\dev\SDL2\lib\x64\;$(ProjectDir)lib\release\OpenAL\;$(ProjectDir)lib\freetype\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;glu32.lib;opengl32.lib;alcommon.lib;al-excommon.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions />
     </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h" />
@@ -776,10 +777,14 @@ OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <Library Include="lib\debug\OpenAL\alcommond.lib" />
     <Library Include="lib\debug\OpenAL\OpenAL32d.lib" />
     <Library Include="lib\freetype\freetype.lib" />
-    <Library Include="lib\release\box2d\box2d.lib" />
     <Library Include="lib\release\OpenAL\al-excommon.lib" />
     <Library Include="lib\release\OpenAL\alcommon.lib" />
     <Library Include="lib\release\OpenAL\OpenAL32.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\box2d\build\src\box2d.vcxproj">
+      <Project>{02c84998-66d9-3a0f-95de-afb967af333d}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
