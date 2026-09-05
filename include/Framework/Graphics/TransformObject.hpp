@@ -60,8 +60,8 @@ public:
 
 	void basicInterpolate(uint32_t p_updateRate, uint32_t p_refreshRate);
 
-	glm::vec3 apparentPos;
-	float apparentRot;
+	glm::vec3 apparentPos = { 0.f, 0.f, 0.f };
+	float apparentRot = 0.f;
 protected:
 	glm::vec2 m_origin;
 	glm::vec3 m_position; // Decided to give it a z axis, as this is handy for certain effects and layering.
